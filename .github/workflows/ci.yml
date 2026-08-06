@@ -8,7 +8,22 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  pull-request-policy:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate branch and PR title
+        env:
+          PR_BRANCH: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: node scripts/validate-pr-metadata.mjs
+
   validate:
     runs-on: ubuntu-latest
     steps:
@@ -18,9 +33,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Audit published dependencies
+        run: npm audit --omit=dev --audit-level=high
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run test:run
       - run: npm run verify:package
       - run: npm run build-storybook
-

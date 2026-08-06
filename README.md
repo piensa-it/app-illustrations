@@ -117,6 +117,10 @@ npm run build-storybook
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) before proposing a new character,
 asset, or public API.
+Development uses trunk-based GitHub Flow, documented in
+[BRANCHING_STRATEGY.md](./BRANCHING_STRATEGY.md).
+Quality, security, dependency, and release controls are described in
+[AUTOMATION.md](./AUTOMATION.md).
 
 ## Credits and licensing
 

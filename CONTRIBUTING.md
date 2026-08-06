@@ -2,6 +2,10 @@
 
 Thanks for helping improve Piensa IT Illustrations.
 
+Development follows [BRANCHING_STRATEGY.md](./BRANCHING_STRATEGY.md). Create a
+short-lived branch from `main`, use Conventional Commits, and open a pull
+request. Direct pushes to `main` are not part of the workflow.
+
 ## Before you start
 
 - Open an issue before proposing a large API or visual-system change.
@@ -45,4 +49,3 @@ requests should include screenshots or a short recording for visual changes.
 
 Code and public API names use English. User-facing Storybook examples and code
 comments may use Spanish, reflecting the project's current audience.
-
