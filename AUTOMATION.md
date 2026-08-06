@@ -7,6 +7,8 @@ The public repository uses four free automation pillars.
 Runs on every pull request and on pushes to `main`. It validates PR metadata,
 production dependency health, lint, TypeScript, tests, package boundaries,
 bundle budgets, and the Storybook build.
+The Browser Gate uses Playwright and Chromium to render critical stories,
+detect browser errors, and compare stable character screenshots.
 
 ## 2. Security
 
@@ -29,4 +31,3 @@ repeats all package validation, and only then publishes to GitHub Packages.
 Repository administrators must additionally enable Dependabot alerts and
 security updates, private vulnerability reporting, code scanning, and immutable
 releases in GitHub Settings.
-

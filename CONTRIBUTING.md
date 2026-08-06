@@ -38,6 +38,7 @@ Run the complete local check before opening a pull request:
 npm run typecheck
 npm run lint
 npm run test:run
+npm run test:browser
 npm run verify:package
 npm run build-storybook
 ```
