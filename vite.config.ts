@@ -26,13 +26,27 @@ export default defineConfig({
     lib: {
       entry: path.resolve(dirname, "src/index.ts"),
       name: "PiensaItIllustrations",
-      formats: ["es", "cjs"],
-      fileName: (format) =>
-        `illustrations.${format === "es" ? "es" : "cjs"}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],
-      output: { exports: "named" },
+      output: [
+        {
+          format: "es",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          entryFileNames: "[name].es.js",
+          chunkFileNames: "chunks/[name]-[hash].es.js",
+          exports: "named",
+        },
+        {
+          format: "cjs",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          entryFileNames: "[name].cjs.js",
+          chunkFileNames: "chunks/[name]-[hash].cjs.js",
+          exports: "named",
+        },
+      ],
     },
     sourcemap: true,
     copyPublicDir: false,

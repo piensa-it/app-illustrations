@@ -1,0 +1,24 @@
+.peep-standing {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.peep-standing__face,
+.peep-standing__closed-eyes,
+.peep-standing__accessory,
+.peep-standing__pose,
+.peep-standing__head {
+  transition: opacity 120ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peep-standing__face,
+  .peep-standing__closed-eyes,
+  .peep-standing__accessory,
+  .peep-standing__pose,
+  .peep-standing__head {
+    transition: none;
+  }
+}

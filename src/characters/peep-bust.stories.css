@@ -1,0 +1,143 @@
+.peep-lab {
+  --lab-ink: #171717;
+  --lab-paper: #f4f7ff;
+  --lab-panel: #ffffff;
+  --lab-accent: #315efb;
+  --lab-line: #d9deed;
+  display: grid;
+  grid-template-columns: minmax(20rem, 1.15fr) minmax(18rem, 0.85fr);
+  min-height: 100vh;
+  color: var(--lab-ink);
+  background: var(--lab-paper);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.peep-lab__stage {
+  position: relative;
+  display: grid;
+  place-items: end center;
+  min-height: 42rem;
+  padding: 4rem 3rem 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 42%, #ffffff 0 18%, transparent 48%),
+    linear-gradient(140deg, #dfe8ff, #f8f9ff 70%);
+}
+
+.peep-lab__stage::after {
+  position: absolute;
+  right: 10%;
+  bottom: 1.5rem;
+  left: 10%;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgba(23, 23, 23, 0.12);
+  content: "";
+  filter: blur(12px);
+}
+
+.peep-lab__figure {
+  z-index: 1;
+  width: min(75%, 34rem);
+  transform-origin: 50% 88%;
+}
+
+.peep-lab__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 5rem);
+  background: var(--lab-panel);
+}
+
+.peep-lab__eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--lab-accent);
+  font: 750 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.peep-lab h1 {
+  max-width: 9ch;
+  margin: 0;
+  font: 400 clamp(2.8rem, 5vw, 5rem)/0.94 Georgia, serif;
+  letter-spacing: -0.055em;
+}
+
+.peep-lab__description {
+  max-width: 32rem;
+  margin: 1.2rem 0 2rem;
+  color: #62687a;
+  line-height: 1.6;
+}
+
+.peep-lab fieldset {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border: 0;
+}
+
+.peep-lab legend {
+  margin-bottom: 0.7rem;
+  font: 750 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.peep-lab__choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.peep-lab button {
+  padding: 0.62rem 0.8rem;
+  border: 1px solid var(--lab-line);
+  border-radius: 0.5rem;
+  color: inherit;
+  background: #fff;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.peep-lab button:hover {
+  border-color: var(--lab-ink);
+}
+
+.peep-lab button:focus-visible {
+  outline: 3px solid rgba(49, 94, 251, 0.35);
+  outline-offset: 2px;
+}
+
+.peep-lab button[aria-pressed="true"] {
+  border-color: var(--lab-ink);
+  color: #fff;
+  background: var(--lab-ink);
+}
+
+.peep-lab__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--lab-line);
+}
+
+.peep-lab__actions button:first-child {
+  border-color: var(--lab-accent);
+  color: #fff;
+  background: var(--lab-accent);
+}
+
+@media (max-width: 800px) {
+  .peep-lab {
+    grid-template-columns: 1fr;
+  }
+
+  .peep-lab__stage {
+    min-height: 34rem;
+  }
+}

@@ -1,0 +1,32 @@
+.peep-bust {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.peep-bust__face,
+.peep-bust__closed-eyes,
+.peep-bust__accessory {
+  transition: opacity 120ms ease;
+}
+
+.peep-bust__closed-eyes {
+  opacity: 0;
+}
+
+.peep-bust[data-blinking="true"] .peep-bust__face {
+  opacity: 0;
+}
+
+.peep-bust[data-blinking="true"] .peep-bust__closed-eyes {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peep-bust__face,
+  .peep-bust__closed-eyes,
+  .peep-bust__accessory {
+    transition: none;
+  }
+}

@@ -3,6 +3,21 @@
 Catálogo compartido de ilustraciones de Piensa IT para aplicaciones,
 onboarding, guías, manuales y banners.
 
+## Uso
+
+```tsx
+import { PeepBust } from "@piensa-it/illustrations";
+import "@piensa-it/illustrations/styles.css";
+
+<PeepBust
+  variant="creative"
+  expression="smile"
+  accessory="round-glasses"
+  blink="auto"
+  title="Persona sonriente con anteojos"
+/>;
+```
+
 ## Frontera del paquete
 
 Este repositorio contiene recursos visuales y componentes SVG estáticos. Las

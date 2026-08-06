@@ -8,22 +8,26 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/illustrations.cjs.js",
-  "module": "./dist/illustrations.es.js",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/illustrations.es.js",
-      "require": "./dist/illustrations.cjs.js"
-    }
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./styles.css": "./dist/style.css"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@piensa-it"
   },
   "scripts": {
     "build": "vite build",
+    "verify:package": "npm run build && node scripts/verify-package.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test": "vitest",
@@ -38,6 +42,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@piensa-it/ui-library": "file:../app-ui",
     "@storybook/addon-a11y": "^10.5.3",
     "@storybook/addon-docs": "^10.5.3",
     "@storybook/react-vite": "^10.5.3",
