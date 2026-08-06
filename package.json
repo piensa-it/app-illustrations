@@ -1,10 +1,29 @@
 {
   "name": "@piensa-it/illustrations",
-  "description": "Catálogo compartido de ilustraciones de Piensa IT para aplicaciones, documentación y material de apoyo.",
+  "description": "Composable, accessible SVG characters for React applications, onboarding, documentation, and product experiences.",
   "version": "0.1.0",
   "private": false,
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "author": "Piensa IT",
+  "homepage": "https://github.com/piensa-it/app-illustrations#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piensa-it/app-illustrations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/piensa-it/app-illustrations/issues"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "svg",
+    "illustrations",
+    "characters",
+    "open-peeps",
+    "accessibility",
+    "storybook"
+  ],
   "files": [
     "dist"
   ],
@@ -42,7 +61,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@piensa-it/ui-library": "file:../app-ui",
     "@storybook/addon-a11y": "^10.5.3",
     "@storybook/addon-docs": "^10.5.3",
     "@storybook/react-vite": "^10.5.3",

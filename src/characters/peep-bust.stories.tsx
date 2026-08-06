@@ -1,10 +1,9 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
-  Illustration,
-  type MotionPreset,
-} from "@piensa-it/ui-library";
-import "@piensa-it/ui-library/styles.css";
+  StoryMotion,
+  type StoryMotionPreset,
+} from "../docs/story-motion";
 
 import {
   PeepBust,
@@ -29,13 +28,14 @@ const accessories: Array<{ value: PeepAccessory; label: string }> = [
   { value: "sunglasses", label: "Gafas de sol" },
 ];
 
-type LabMotion = MotionPreset | "none";
+type LabMotion = StoryMotionPreset;
 
 const variants: Array<{ value: PeepBustVariant; label: string }> = [
   { value: "classic", label: "Clásico" },
   { value: "creative", label: "Creativo" },
   { value: "casual", label: "Casual" },
   { value: "mentor", label: "Mentor" },
+  { value: "coffee", label: "Con café" },
 ];
 
 function InteractivePeepLab() {
@@ -55,9 +55,8 @@ function InteractivePeepLab() {
   return (
     <main className="peep-lab">
       <section className="peep-lab__stage" aria-label="Vista previa del personaje">
-        <Illustration
+        <StoryMotion
           className="peep-lab__figure"
-          size="full"
           motion={motion}
           paused={paused}
           key={motionKey}
@@ -70,7 +69,7 @@ function InteractivePeepLab() {
             paused={paused}
             title="Personaje de demostración"
           />
-        </Illustration>
+        </StoryMotion>
       </section>
 
       <section className="peep-lab__panel">

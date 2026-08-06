@@ -22,7 +22,10 @@ describe("PeepBust", () => {
       <PeepBust variant="creative" title="Personaje creativo" blink="off" />,
     );
 
-    expect(container.querySelectorAll("image")).toHaveLength(4);
+    expect(container.querySelector('[data-peep-layer="head"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-peep-layer="body"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-peep-layer="face"]')).toBeInTheDocument();
+    expect(container.querySelectorAll("image")).toHaveLength(0);
     expect(
       screen.getByRole("img", { name: "Personaje creativo" }),
     ).toBeInTheDocument();

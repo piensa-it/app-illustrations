@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Illustration } from "@piensa-it/ui-library";
-import "@piensa-it/ui-library/styles.css";
+import { StoryMotion } from "../docs/story-motion";
 
 import {
   PeepStanding,
@@ -24,6 +23,7 @@ const variants: Array<{ value: PeepStandingVariant; label: string }> = [
   { value: "creative", label: "Creativo" },
   { value: "casual", label: "Casual" },
   { value: "mentor", label: "Mentor" },
+  { value: "coffee", label: "Café" },
 ];
 
 const expressions: Array<{ value: PeepExpression; label: string }> = [
@@ -50,7 +50,7 @@ function StandingLab() {
   return (
     <main className="peep-lab">
       <section className="peep-lab__stage" aria-label="Vista previa de cuerpo completo">
-        <Illustration className="peep-lab__figure" size="full" motion="enter" paused={paused}>
+        <StoryMotion className="peep-lab__figure" motion="enter" paused={paused}>
           <PeepStanding
             pose={pose}
             variant={variant}
@@ -59,7 +59,7 @@ function StandingLab() {
             paused={paused}
             title="Personaje de cuerpo completo"
           />
-        </Illustration>
+        </StoryMotion>
       </section>
 
       <section className="peep-lab__panel">

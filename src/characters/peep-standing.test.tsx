@@ -15,7 +15,8 @@ describe("PeepStanding", () => {
     );
 
     expect(screen.getByRole("img", { name: "Persona señalando" })).toBeInTheDocument();
-    expect(container.querySelectorAll("image")).toHaveLength(5);
+    expect(container.querySelector('[data-peep-layer="head"]')).toBeInTheDocument();
+    expect(container.querySelectorAll("image")).toHaveLength(4);
   });
 
   it("es decorativo cuando no recibe título", () => {

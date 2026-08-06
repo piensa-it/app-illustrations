@@ -8,16 +8,17 @@ import type {
   PeepExpression,
 } from "./peep-bust";
 import { usePeepBlink } from "./use-peep-blink";
+import { SvgLayer } from "./svg-layer";
 
 import crossedArmsUrl from "../../assets/source/open-peeps/Separate Atoms/pose/standing/crossed_arms-1.svg?url";
 import pointingUrl from "../../assets/source/open-peeps/Separate Atoms/pose/standing/pointing_finger-1.svg?url";
 import restingUrl from "../../assets/source/open-peeps/Separate Atoms/pose/standing/resting-1.svg?url";
 import robotDanceUrl from "../../assets/source/open-peeps/Separate Atoms/pose/standing/robot_dance-1.svg?url";
 import walkingUrl from "../../assets/source/open-peeps/Separate Atoms/pose/standing/walking-1.svg?url";
-import bunHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/Bun 2.svg?url";
-import bantuKnotsHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/Bantu Knots.svg?url";
-import grayMediumHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/Gray Medium.svg?url";
-import beanieHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/hat-beanie.svg?url";
+import bunHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/Bun 2.svg?raw";
+import bantuKnotsHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/Bantu Knots.svg?raw";
+import grayMediumHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/Gray Medium.svg?raw";
+import beanieHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/hat-beanie.svg?raw";
 import aweUrl from "../../assets/source/open-peeps/Separate Atoms/face/Awe.svg?url";
 import concernedUrl from "../../assets/source/open-peeps/Separate Atoms/face/Concerned.svg?url";
 import closedEyesUrl from "../../assets/source/open-peeps/Separate Atoms/face/Eyes Closed.svg?url";
@@ -55,10 +56,11 @@ const poseUrls: Record<PeepStandingPose, string> = {
 };
 
 const headUrls: Record<PeepStandingVariant, string> = {
-  classic: bunHeadUrl,
-  creative: bantuKnotsHeadUrl,
-  casual: beanieHeadUrl,
-  mentor: grayMediumHeadUrl,
+  classic: bunHeadSource,
+  creative: bantuKnotsHeadSource,
+  casual: beanieHeadSource,
+  mentor: grayMediumHeadSource,
+  coffee: bunHeadSource,
 };
 
 const expressionUrls: Record<PeepExpression, string> = {
@@ -111,13 +113,15 @@ export function PeepStanding({
         width="1645"
         height="2500"
       />
-      <image
+      <SvgLayer
         className="peep-standing__head"
-        href={headUrls[variant]}
-        x="404"
-        y="180"
-        width="473"
-        height="567"
+        source={headUrls[variant]}
+        viewBox="0 0 473 567"
+        x={404}
+        y={180}
+        width={473}
+        height={567}
+        layer="head"
       />
       {!closedByExpression && (
         <image

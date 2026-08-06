@@ -2,24 +2,26 @@ import { useId } from "react";
 
 import type { IllustrationProps } from "../types";
 
-import bodyUrl from "../../assets/source/open-peeps/Separate Atoms/body/Tee 1.svg?url";
-import headUrl from "../../assets/source/open-peeps/Separate Atoms/head/Bun 2.svg?url";
-import blazerBodyUrl from "../../assets/source/open-peeps/Separate Atoms/body/Blazer Black Tee.svg?url";
-import dressBodyUrl from "../../assets/source/open-peeps/Separate Atoms/body/Dress.svg?url";
-import whateverBodyUrl from "../../assets/source/open-peeps/Separate Atoms/body/Whatever.svg?url";
-import bantuKnotsHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/Bantu Knots.svg?url";
-import grayMediumHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/Gray Medium.svg?url";
-import beanieHeadUrl from "../../assets/source/open-peeps/Separate Atoms/head/hat-beanie.svg?url";
-import aweUrl from "../../assets/source/open-peeps/Separate Atoms/face/Awe.svg?url";
-import concernedUrl from "../../assets/source/open-peeps/Separate Atoms/face/Concerned.svg?url";
-import closedEyesUrl from "../../assets/source/open-peeps/Separate Atoms/face/Eyes Closed.svg?url";
-import seriousUrl from "../../assets/source/open-peeps/Separate Atoms/face/Serious.svg?url";
-import smileUrl from "../../assets/source/open-peeps/Separate Atoms/face/Smile.svg?url";
-import glassesUrl from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses.svg?url";
-import glassesFourUrl from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses 4.svg?url";
-import sunglassesUrl from "../../assets/source/open-peeps/Separate Atoms/accessories/Sunglasses.svg?url";
+import bodySource from "../../assets/source/open-peeps/Separate Atoms/body/Tee 1.svg?raw";
+import headSource from "../../assets/source/open-peeps/Separate Atoms/head/Bun 2.svg?raw";
+import blazerBodySource from "../../assets/source/open-peeps/Separate Atoms/body/Blazer Black Tee.svg?raw";
+import dressBodySource from "../../assets/source/open-peeps/Separate Atoms/body/Dress.svg?raw";
+import whateverBodySource from "../../assets/source/open-peeps/Separate Atoms/body/Whatever.svg?raw";
+import coffeeBodySource from "../../assets/source/open-peeps/Separate Atoms/body/Coffee.svg?raw";
+import bantuKnotsHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/Bantu Knots.svg?raw";
+import grayMediumHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/Gray Medium.svg?raw";
+import beanieHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/hat-beanie.svg?raw";
+import aweSource from "../../assets/source/open-peeps/Separate Atoms/face/Awe.svg?raw";
+import concernedSource from "../../assets/source/open-peeps/Separate Atoms/face/Concerned.svg?raw";
+import closedEyesSource from "../../assets/source/open-peeps/Separate Atoms/face/Eyes Closed.svg?raw";
+import seriousSource from "../../assets/source/open-peeps/Separate Atoms/face/Serious.svg?raw";
+import smileSource from "../../assets/source/open-peeps/Separate Atoms/face/Smile.svg?raw";
+import glassesSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses.svg?raw";
+import glassesFourSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses 4.svg?raw";
+import sunglassesSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Sunglasses.svg?raw";
 
 import "./peep-bust.css";
+import { SvgLayer } from "./svg-layer";
 import { usePeepBlink } from "./use-peep-blink";
 
 export type PeepExpression =
@@ -37,7 +39,7 @@ export type PeepAccessory =
 
 export type PeepBlink = "auto" | "off";
 
-export type PeepBustVariant = "classic" | "creative" | "casual" | "mentor";
+export type PeepBustVariant = "classic" | "creative" | "casual" | "mentor" | "coffee";
 
 export interface PeepBustProps extends IllustrationProps {
   /** Combinación base de cuerpo y cabeza. */
@@ -52,28 +54,29 @@ export interface PeepBustProps extends IllustrationProps {
   paused?: boolean;
 }
 
-const expressionUrls: Record<PeepExpression, string> = {
-  smile: smileUrl,
-  awe: aweUrl,
-  concerned: concernedUrl,
-  serious: seriousUrl,
-  "eyes-closed": closedEyesUrl,
+const expressionSources: Record<PeepExpression, string> = {
+  smile: smileSource,
+  awe: aweSource,
+  concerned: concernedSource,
+  serious: seriousSource,
+  "eyes-closed": closedEyesSource,
 };
 
-const accessoryUrls: Record<Exclude<PeepAccessory, "none">, string> = {
-  glasses: glassesUrl,
-  "round-glasses": glassesFourUrl,
-  sunglasses: sunglassesUrl,
+const accessorySources: Record<Exclude<PeepAccessory, "none">, string> = {
+  glasses: glassesSource,
+  "round-glasses": glassesFourSource,
+  sunglasses: sunglassesSource,
 };
 
 const variantUrls: Record<
   PeepBustVariant,
   { body: string; head: string }
 > = {
-  classic: { body: bodyUrl, head: headUrl },
-  creative: { body: dressBodyUrl, head: bantuKnotsHeadUrl },
-  casual: { body: blazerBodyUrl, head: beanieHeadUrl },
-  mentor: { body: whateverBodyUrl, head: grayMediumHeadUrl },
+  classic: { body: bodySource, head: headSource },
+  creative: { body: dressBodySource, head: bantuKnotsHeadSource },
+  casual: { body: blazerBodySource, head: beanieHeadSource },
+  mentor: { body: whateverBodySource, head: grayMediumHeadSource },
+  coffee: { body: coffeeBodySource, head: headSource },
 };
 
 export function PeepBust({
@@ -90,9 +93,9 @@ export function PeepBust({
     enabled: blink === "auto" && !paused && expression !== "eyes-closed",
   });
 
-  const faceUrl = expressionUrls[expression];
+  const faceSource = expressionSources[expression];
   const variantLayers = variantUrls[variant];
-  const accessoryUrl = accessory === "none" ? null : accessoryUrls[accessory];
+  const accessorySource = accessory === "none" ? null : accessorySources[accessory];
   const closedByExpression = expression === "eyes-closed";
 
   return (
@@ -107,48 +110,57 @@ export function PeepBust({
       xmlns="http://www.w3.org/2000/svg"
     >
       {title && <title id={titleId}>{title}</title>}
-      <image
-        href={variantLayers.body}
-        x="147"
-        y="639"
-        width="818"
-        height="733"
+      <SvgLayer
+        source={variantLayers.body}
+        viewBox="0 0 818 733"
+        x={147}
+        y={639}
+        width={818}
+        height={733}
+        layer="body"
       />
-      <image
-        href={variantLayers.head}
-        x="372"
-        y="180"
-        width="473"
-        height="567"
+      <SvgLayer
+        className="peep-bust__head"
+        source={variantLayers.head}
+        viewBox="0 0 473 567"
+        x={372}
+        y={180}
+        width={473}
+        height={567}
+        layer="head"
       />
       {!closedByExpression && (
-        <image
+        <SvgLayer
           className="peep-bust__face"
-          href={faceUrl}
-          opacity={isBlinking ? 0 : 1}
-          x="531"
-          y="366"
-          width="289"
-          height="293"
+          source={faceSource}
+          viewBox="0 0 289 293"
+          x={531}
+          y={366}
+          width={289}
+          height={293}
+          layer="face"
         />
       )}
-      <image
+      <SvgLayer
         className="peep-bust__closed-eyes"
-        href={closedEyesUrl}
-        opacity={isBlinking || closedByExpression ? 1 : 0}
-        x="531"
-        y="366"
-        width="289"
-        height="293"
+        source={closedEyesSource}
+        viewBox="0 0 289 293"
+        x={531}
+        y={366}
+        width={289}
+        height={293}
+        layer="closed-eyes"
       />
-      {accessoryUrl && (
-        <image
+      {accessorySource && (
+        <SvgLayer
           className="peep-bust__accessory"
-          href={accessoryUrl}
-          x="419"
-          y="421"
-          width="392"
-          height="138"
+          source={accessorySource}
+          viewBox="0 0 392 138"
+          x={419}
+          y={421}
+          width={392}
+          height={138}
+          layer="accessory"
         />
       )}
     </svg>

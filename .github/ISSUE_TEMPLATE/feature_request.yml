@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest a reusable character, composition, or API improvement.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Product need
+      description: What product moment or user problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the visual behavior and public API you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Asset provenance
+      description: If artwork is involved, provide its author, source, and license.
+
