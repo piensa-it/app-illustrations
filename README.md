@@ -62,10 +62,12 @@ Use `PeepStanding` when body language matters:
 import { PeepStanding } from "@piensa-it/illustrations";
 
 <PeepStanding
-  pose="pointing"
-  variant="creative"
-  expression="awe"
-  title="A person pointing at the next step"
+  pose="walking"
+  outfit="dark-top"
+  head="mohawk"
+  expression="smile"
+  accessory="glasses"
+  title="A person walking to the next step"
 />;
 ```
 

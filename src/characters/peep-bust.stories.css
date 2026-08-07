@@ -132,6 +132,156 @@
   background: var(--lab-accent);
 }
 
+.peep-lab--standing,
+.peep-lab--interactive {
+  height: 100svh;
+  min-height: 36rem;
+  overflow: hidden;
+}
+
+.peep-lab--standing .peep-lab__stage,
+.peep-lab--interactive .peep-lab__stage {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(1.5rem, 4vh, 3rem) 2rem 0;
+}
+
+.peep-lab--standing .peep-lab__figure {
+  width: auto;
+  height: min(70svh, 36rem);
+}
+
+.peep-lab--interactive .peep-lab__figure {
+  width: auto;
+  height: min(65svh, 36rem);
+}
+
+.peep-lab--standing .peep-standing {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+}
+
+.peep-lab--interactive .peep-bust {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+}
+
+.peep-lab--standing .peep-lab__panel,
+.peep-lab--interactive .peep-lab__panel {
+  box-sizing: border-box;
+  justify-content: flex-start;
+  height: 100%;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  overflow-y: auto;
+}
+
+.peep-lab--standing h1,
+.peep-lab--interactive h1 {
+  max-width: 13ch;
+  font-size: clamp(2.4rem, 4vw, 4.25rem);
+}
+
+.peep-lab--standing .peep-lab__description,
+.peep-lab--interactive .peep-lab__description {
+  margin: 0.9rem 0 1.25rem;
+}
+
+.peep-lab__accordion {
+  border-top: 1px solid var(--lab-line);
+}
+
+.peep-lab__accordion-section {
+  border-bottom: 1px solid var(--lab-line);
+}
+
+.peep-lab__accordion-header {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.45rem 0;
+}
+
+.peep-lab .peep-lab__accordion-trigger {
+  display: grid;
+  grid-template-columns: minmax(8rem, auto) 1fr auto;
+  gap: 0.8rem;
+  align-items: center;
+  width: 100%;
+  padding: 0.35rem 0.25rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.peep-lab .peep-lab__carousel-arrow {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  place-items: center;
+  border-color: var(--lab-line);
+  border-radius: 50%;
+  color: var(--lab-ink);
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+.peep-lab .peep-lab__carousel-arrow:hover {
+  border-color: var(--lab-accent);
+  color: #fff;
+  background: var(--lab-accent);
+}
+
+.peep-lab .peep-lab__accordion-trigger:hover {
+  color: var(--lab-accent);
+}
+
+.peep-lab__accordion-selection {
+  overflow: hidden;
+  color: #62687a;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.peep-lab__accordion-icon {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  border: 1px solid var(--lab-line);
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.peep-lab__accordion-panel fieldset {
+  margin: 0;
+  padding: 0.2rem 0 1rem;
+}
+
+.peep-lab__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.peep-lab--standing .peep-lab__actions {
+  margin-top: 1rem;
+}
+
 @media (max-width: 800px) {
   .peep-lab {
     grid-template-columns: 1fr;
@@ -140,4 +290,32 @@
   .peep-lab__stage {
     min-height: 34rem;
   }
+
+  .peep-lab--standing,
+  .peep-lab--interactive {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .peep-lab--standing .peep-lab__stage,
+  .peep-lab--interactive .peep-lab__stage {
+    height: min(58svh, 34rem);
+    min-height: 26rem;
+  }
+
+  .peep-lab--standing .peep-lab__figure {
+    height: min(50svh, 29rem);
+  }
+
+  .peep-lab--interactive .peep-lab__figure {
+    height: min(48svh, 27rem);
+  }
+
+  .peep-lab--standing .peep-lab__panel,
+  .peep-lab--interactive .peep-lab__panel {
+    height: auto;
+    overflow: visible;
+  }
+
 }

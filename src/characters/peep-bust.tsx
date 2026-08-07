@@ -12,12 +12,28 @@ import bantuKnotsHeadSource from "../../assets/source/open-peeps/Separate Atoms/
 import grayMediumHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/Gray Medium.svg?raw";
 import beanieHeadSource from "../../assets/source/open-peeps/Separate Atoms/head/hat-beanie.svg?raw";
 import aweSource from "../../assets/source/open-peeps/Separate Atoms/face/Awe.svg?raw";
+import angrySource from "../../assets/source/open-peeps/Separate Atoms/face/Angry with Fang.svg?raw";
+import calmSource from "../../assets/source/open-peeps/Separate Atoms/face/Calm.svg?raw";
+import cheekySource from "../../assets/source/open-peeps/Separate Atoms/face/Cheeky.svg?raw";
 import concernedSource from "../../assets/source/open-peeps/Separate Atoms/face/Concerned.svg?raw";
+import cuteSource from "../../assets/source/open-peeps/Separate Atoms/face/Cute.svg?raw";
 import closedEyesSource from "../../assets/source/open-peeps/Separate Atoms/face/Eyes Closed.svg?raw";
+import explainingSource from "../../assets/source/open-peeps/Separate Atoms/face/Explaining.svg?raw";
+import fearSource from "../../assets/source/open-peeps/Separate Atoms/face/Fear.svg?raw";
+import lovingGrinSource from "../../assets/source/open-peeps/Separate Atoms/face/Loving Grin 1.svg?raw";
 import seriousSource from "../../assets/source/open-peeps/Separate Atoms/face/Serious.svg?raw";
+import smileBigSource from "../../assets/source/open-peeps/Separate Atoms/face/Smile Big.svg?raw";
+import smileLolSource from "../../assets/source/open-peeps/Separate Atoms/face/Smile LOL.svg?raw";
 import smileSource from "../../assets/source/open-peeps/Separate Atoms/face/Smile.svg?raw";
+import suspiciousSource from "../../assets/source/open-peeps/Separate Atoms/face/Suspicious.svg?raw";
+import tiredSource from "../../assets/source/open-peeps/Separate Atoms/face/Tired.svg?raw";
+import eyepatchSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Eyepatch.svg?raw";
+import glassesTwoSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses 2.svg?raw";
+import glassesThreeSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses 3.svg?raw";
 import glassesSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses.svg?raw";
 import glassesFourSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses 4.svg?raw";
+import glassesFiveSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Glasses 5.svg?raw";
+import sunglassesTwoSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Sunglasses 2.svg?raw";
 import sunglassesSource from "../../assets/source/open-peeps/Separate Atoms/accessories/Sunglasses.svg?raw";
 
 import "./peep-bust.css";
@@ -26,16 +42,32 @@ import { usePeepBlink } from "./use-peep-blink";
 
 export type PeepExpression =
   | "smile"
+  | "smile-big"
+  | "laugh"
+  | "loving-grin"
   | "awe"
+  | "angry"
+  | "calm"
+  | "cheeky"
   | "concerned"
+  | "cute"
+  | "explaining"
+  | "fear"
   | "serious"
+  | "suspicious"
+  | "tired"
   | "eyes-closed";
 
 export type PeepAccessory =
   | "none"
+  | "eyepatch"
   | "glasses"
+  | "square-glasses"
+  | "half-rim-glasses"
   | "round-glasses"
-  | "sunglasses";
+  | "wide-glasses"
+  | "sunglasses"
+  | "sport-sunglasses";
 
 export type PeepBlink = "auto" | "off";
 
@@ -56,16 +88,32 @@ export interface PeepBustProps extends IllustrationProps {
 
 const expressionSources: Record<PeepExpression, string> = {
   smile: smileSource,
+  "smile-big": smileBigSource,
+  laugh: smileLolSource,
+  "loving-grin": lovingGrinSource,
   awe: aweSource,
+  angry: angrySource,
+  calm: calmSource,
+  cheeky: cheekySource,
   concerned: concernedSource,
+  cute: cuteSource,
+  explaining: explainingSource,
+  fear: fearSource,
   serious: seriousSource,
+  suspicious: suspiciousSource,
+  tired: tiredSource,
   "eyes-closed": closedEyesSource,
 };
 
 const accessorySources: Record<Exclude<PeepAccessory, "none">, string> = {
+  eyepatch: eyepatchSource,
   glasses: glassesSource,
+  "square-glasses": glassesTwoSource,
+  "half-rim-glasses": glassesThreeSource,
   "round-glasses": glassesFourSource,
+  "wide-glasses": glassesFiveSource,
   sunglasses: sunglassesSource,
+  "sport-sunglasses": sunglassesTwoSource,
 };
 
 const variantUrls: Record<

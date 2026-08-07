@@ -9,6 +9,8 @@ export {
 } from "./characters/peep-bust";
 export {
   PeepStanding,
+  type PeepStandingHead,
+  type PeepStandingOutfit,
   type PeepStandingPose,
   type PeepStandingProps,
   type PeepStandingVariant,
