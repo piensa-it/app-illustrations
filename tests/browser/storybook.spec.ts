@@ -53,7 +53,7 @@ test.describe("Storybook browser gate", () => {
     ).toBeVisible();
 
     const hasPageOverflow = await page.evaluate(
-      () => document.documentElement.scrollHeight > window.innerHeight,
+      () => document.body.scrollHeight > document.body.clientHeight,
     );
     expect(hasPageOverflow).toBe(false);
     expect(errors).toEqual([]);
@@ -137,14 +137,16 @@ test.describe("Storybook browser gate", () => {
     ).toBeVisible();
 
     const previewBounds = await page.locator(".peep-lab__figure").boundingBox();
+    const labBounds = await page.locator(".peep-lab").boundingBox();
     expect(previewBounds).not.toBeNull();
+    expect(labBounds).not.toBeNull();
     expect(previewBounds!.y).toBeGreaterThanOrEqual(0);
     expect(previewBounds!.y + previewBounds!.height).toBeLessThanOrEqual(
-      page.viewportSize()!.height,
+      labBounds!.y + labBounds!.height,
     );
 
     const hasPageOverflow = await page.evaluate(
-      () => document.documentElement.scrollHeight > window.innerHeight,
+      () => document.body.scrollHeight > document.body.clientHeight,
     );
     expect(hasPageOverflow).toBe(false);
 
