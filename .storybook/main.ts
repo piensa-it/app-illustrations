@@ -13,6 +13,17 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+  viteFinal: async (viteConfig) => {
+    // Storybook consumes source files directly and must not generate package
+    // declarations. Keeping vite:dts here makes clean browser jobs depend on
+    // dist/index.d.ts, which only exists after the library build.
+    viteConfig.plugins = viteConfig.plugins?.filter(
+      (plugin) =>
+        (plugin as { name?: string } | null | undefined)?.name !== "vite:dts",
+    );
+
+    return viteConfig;
+  },
 };
 
 export default config;
