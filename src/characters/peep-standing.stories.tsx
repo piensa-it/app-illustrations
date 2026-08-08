@@ -133,6 +133,7 @@ function StandingLab() {
           <StoryControlAccordion
             id="head"
             label="Cabeza y cabello"
+            icon="◉"
             selectedLabel={selectedHead}
             expanded={openSection === "head"}
             onToggle={() => toggleSection("head")}
@@ -149,6 +150,7 @@ function StandingLab() {
           <StoryControlAccordion
             id="expression"
             label="Expresión"
+            icon="☺"
             selectedLabel={selectedExpression}
             expanded={openSection === "expression"}
             onToggle={() => toggleSection("expression")}
@@ -169,6 +171,7 @@ function StandingLab() {
           <StoryControlAccordion
             id="accessory"
             label="Accesorio"
+            icon="◌"
             selectedLabel={selectedAccessory}
             expanded={openSection === "accessory"}
             onToggle={() => toggleSection("accessory")}
@@ -189,6 +192,7 @@ function StandingLab() {
           <StoryControlAccordion
             id="outfit"
             label="Vestuario"
+            icon="▣"
             selectedLabel={selectedOutfit}
             expanded={openSection === "outfit"}
             onToggle={() => toggleSection("outfit")}
@@ -212,6 +216,7 @@ function StandingLab() {
           <StoryControlAccordion
             id="pose"
             label="Pose"
+            icon="↗"
             selectedLabel={selectedPose}
             expanded={openSection === "pose"}
             onToggle={() => toggleSection("pose")}

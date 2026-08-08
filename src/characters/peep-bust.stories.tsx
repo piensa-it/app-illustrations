@@ -144,6 +144,7 @@ function InteractivePeepLab() {
           <StoryControlAccordion
             id="bust-variant"
             label="Personaje"
+            icon="◒"
             selectedLabel={selectedVariant}
             expanded={openSection === "variant"}
             onToggle={() => toggleSection("variant")}
@@ -169,6 +170,7 @@ function InteractivePeepLab() {
           <StoryControlAccordion
             id="bust-expression"
             label="Expresión"
+            icon="☺"
             selectedLabel={selectedExpression}
             expanded={openSection === "expression"}
             onToggle={() => toggleSection("expression")}
@@ -194,6 +196,7 @@ function InteractivePeepLab() {
           <StoryControlAccordion
             id="bust-accessory"
             label="Accesorio"
+            icon="◉"
             selectedLabel={selectedAccessory}
             expanded={openSection === "accessory"}
             onToggle={() => toggleSection("accessory")}
@@ -219,6 +222,7 @@ function InteractivePeepLab() {
           <StoryControlAccordion
             id="bust-behavior"
             label="Comportamiento"
+            icon="◐"
             selectedLabel={selectedBehavior}
             expanded={openSection === "behavior"}
             onToggle={() => toggleSection("behavior")}
@@ -244,6 +248,7 @@ function InteractivePeepLab() {
           <StoryControlAccordion
             id="bust-motion"
             label="Movimiento"
+            icon="✦"
             selectedLabel={selectedMotion}
             expanded={openSection === "motion"}
             onToggle={() => toggleSection("motion")}

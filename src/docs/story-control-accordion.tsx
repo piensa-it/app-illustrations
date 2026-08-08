@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 interface StoryControlAccordionProps {
   id: string;
   label: string;
+  icon: string;
   selectedLabel: string;
   expanded: boolean;
   onToggle: () => void;
@@ -15,6 +16,7 @@ interface StoryControlAccordionProps {
 export function StoryControlAccordion({
   id,
   label,
+  icon,
   selectedLabel,
   expanded,
   onToggle,
@@ -43,7 +45,10 @@ export function StoryControlAccordion({
           aria-controls={panelId}
           onClick={onToggle}
         >
-          <span>{label}</span>
+          <span className="peep-lab__accordion-label">{label}</span>
+          <span className="peep-lab__accordion-control-icon" aria-hidden="true">
+            {icon}
+          </span>
           <span className="peep-lab__accordion-selection" aria-live="polite">
             {selectedLabel}
           </span>

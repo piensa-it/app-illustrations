@@ -160,4 +160,26 @@ test.describe("Storybook browser gate", () => {
       page.getByRole("button", { name: /Pose Caminando/ }),
     ).toBeVisible();
   });
+
+  test("keeps the character prominent with a compact mobile control rail", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(
+      storyUrl("laboratorio-personaje-interactivo--prototipo-de-busto"),
+    );
+    await stabilize(page);
+
+    await expect(page.locator(".peep-bust")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Personaje" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Accesorio" })).toBeVisible();
+
+    await page.getByRole("button", { name: "Accesorio" }).click();
+    const choices = page.locator(".peep-lab__accordion-panel .peep-lab__choices");
+    await expect(page.getByRole("button", { name: "Gafas deportivas" })).toBeVisible();
+    expect(await choices.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);
+
+    const hasPageOverflow = await page.evaluate(
+      () => document.body.scrollHeight > document.body.clientHeight,
+    );
+    expect(hasPageOverflow).toBe(false);
+  });
 });

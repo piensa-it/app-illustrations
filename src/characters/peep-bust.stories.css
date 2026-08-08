@@ -251,6 +251,10 @@
   white-space: nowrap;
 }
 
+.peep-lab__accordion-control-icon {
+  display: none;
+}
+
 .peep-lab__accordion-icon {
   display: grid;
   width: 1.5rem;
@@ -293,29 +297,148 @@
 
   .peep-lab--standing,
   .peep-lab--interactive {
-    height: auto;
-    min-height: 100svh;
-    overflow: visible;
+    position: relative;
+    height: 100svh;
+    min-height: 32rem;
+    overflow: hidden;
   }
 
   .peep-lab--standing .peep-lab__stage,
   .peep-lab--interactive .peep-lab__stage {
-    height: min(58svh, 34rem);
-    min-height: 26rem;
+    height: 100%;
+    min-height: 0;
+    padding: 1.5rem 4.75rem 1.5rem 1.5rem;
   }
 
   .peep-lab--standing .peep-lab__figure {
-    height: min(50svh, 29rem);
+    height: min(72svh, 34rem);
   }
 
   .peep-lab--interactive .peep-lab__figure {
-    height: min(48svh, 27rem);
+    height: min(68svh, 31rem);
   }
 
   .peep-lab--standing .peep-lab__panel,
   .peep-lab--interactive .peep-lab__panel {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    display: block;
     height: auto;
+    padding: 1rem 0.6rem;
     overflow: visible;
+    pointer-events: none;
+    background: transparent;
   }
 
+  .peep-lab--standing .peep-lab__panel > :not(.peep-lab__accordion),
+  .peep-lab--interactive .peep-lab__panel > :not(.peep-lab__accordion) {
+    display: none;
+  }
+
+  .peep-lab__accordion {
+    position: absolute;
+    top: 50%;
+    right: 0.6rem;
+    display: grid;
+    gap: 0.45rem;
+    width: 2.85rem;
+    transform: translateY(-50%);
+    border: 0;
+    pointer-events: auto;
+  }
+
+  .peep-lab__accordion-section {
+    position: static;
+    border: 0;
+  }
+
+  .peep-lab__accordion-header {
+    display: block;
+    padding: 0;
+  }
+
+  .peep-lab .peep-lab__carousel-arrow,
+  .peep-lab__accordion-selection,
+  .peep-lab__accordion-icon {
+    display: none;
+  }
+
+  .peep-lab .peep-lab__accordion-trigger {
+    display: grid;
+    width: 2.85rem;
+    height: 2.85rem;
+    padding: 0;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--lab-line), #fff 45%);
+    border-radius: 50%;
+    color: var(--lab-ink);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 8px 20px rgba(23, 23, 23, 0.12);
+    backdrop-filter: blur(10px);
+  }
+
+  .peep-lab .peep-lab__accordion-trigger[aria-expanded="true"] {
+    border-color: var(--lab-accent);
+    color: #fff;
+    background: var(--lab-accent);
+    box-shadow: 0 10px 24px rgba(49, 94, 251, 0.32);
+  }
+
+  .peep-lab__accordion-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .peep-lab__accordion-control-icon {
+    display: block;
+    font: 700 1.15rem/1 Georgia, serif;
+  }
+
+  .peep-lab__accordion-panel {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    padding: 0.75rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--lab-line), #fff 35%);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 18px 44px rgba(23, 23, 23, 0.2);
+    backdrop-filter: blur(14px);
+  }
+
+  .peep-lab__accordion-panel fieldset {
+    padding: 0;
+  }
+
+  .peep-lab__choices {
+    flex-wrap: nowrap;
+    padding-bottom: 0.2rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  .peep-lab__choices button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 800px) {
+  .sbdocs-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
