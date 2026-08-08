@@ -23,21 +23,28 @@ appearance without shipping a separate image for every combination.
 - Motion kept separate through
   [`@piensa-it/ui-library`](https://github.com/piensa-it/app-ui)
 
-## Quick start
+## Installation
 
-The package will be published with the first public release. While the project
-is in preview, clone the repository and run Storybook:
+Releases are distributed through GitHub Packages:
 
-```bash
-git clone https://github.com/piensa-it/app-illustrations.git
-cd app-illustrations
-npm install
-npm run storybook
+```ini
+# .npmrc
+@piensa-it:registry=https://npm.pkg.github.com
 ```
 
-Storybook opens at `http://localhost:6007`.
+Authenticate with a GitHub token that can read packages, then install:
 
-## Usage
+```bash
+npm install @piensa-it/illustrations
+```
+
+Import the library styles once in your application entry point:
+
+```tsx
+import "@piensa-it/illustrations/styles.css";
+```
+
+## Quick start
 
 ```tsx
 import { PeepBust } from "@piensa-it/illustrations";
