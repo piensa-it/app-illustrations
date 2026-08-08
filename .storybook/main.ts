@@ -27,8 +27,10 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
-  managerHead: seoHead,
-  previewHead: seoHead,
+  managerHead: (head) => `${head}${seoHead()}`,
+  // Conserva los estilos base que Storybook inyecta en el iframe. Entre ellos
+  // están los que ocultan los placeholders de carga y de "No Preview".
+  previewHead: (head) => `${head}${seoHead()}`,
   viteFinal: async (viteConfig) => {
     // Storybook consumes source files directly and must not generate package
     // declarations. Keeping vite:dts here makes clean browser jobs depend on
