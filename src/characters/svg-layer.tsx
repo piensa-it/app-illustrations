@@ -16,7 +16,12 @@ const innerSvg = (source: string) => {
   return start >= 0 && end > start ? source.slice(start + 1, end) : source;
 };
 
-/** Renderiza una fuente SVG confiable como capa vectorial sin recortar su contenido. */
+/**
+ * Renderiza una fuente SVG confiable como capa vectorial sin recortar su
+ * contenido. `source` siempre es arte Open Peeps importado en build-time desde
+ * assets/, nunca entrada de usuario, por lo que inlinearlo con
+ * dangerouslySetInnerHTML es seguro (ver el `nosemgrep` en la línea).
+ */
 export function SvgLayer({ source, viewBox, x, y, width, height, className, layer }: SvgLayerProps) {
   return (
     <svg
@@ -30,7 +35,7 @@ export function SvgLayer({ source, viewBox, x, y, width, height, className, laye
       width={width}
       x={x}
       y={y}
-      dangerouslySetInnerHTML={{ __html: innerSvg(source) }}
+      dangerouslySetInnerHTML={/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml */ { __html: innerSvg(source) }}
     />
   );
 }

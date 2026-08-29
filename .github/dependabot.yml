@@ -9,6 +9,9 @@ updates:
       time: "09:00"
       timezone: America/Bogota
     open-pull-requests-limit: 5
+    # Wait a week before opening a PR for a fresh release (supply-chain hygiene).
+    cooldown:
+      default-days: 7
     groups:
       npm-minor-and-patch:
         update-types:
@@ -41,6 +44,8 @@ updates:
       day: monday
       time: "09:30"
       timezone: America/Bogota
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         patterns:
