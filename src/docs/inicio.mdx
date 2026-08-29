@@ -1,0 +1,165 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import { PeepBust } from "../characters/peep-bust";
+import { PeepStanding } from "../characters/peep-standing";
+
+<Meta title="Inicio" />
+
+# Piensa IT Illustrations
+
+Personajes SVG accesibles y personalizables para React — la misma identidad
+visual en onboarding, estados vacíos, tours de producto, centros de ayuda,
+banners y documentación. Los personajes se renderizan como capas SVG reales, así
+que puedes cambiar pose, expresión, accesorios y animación sin enviar una imagen
+distinta por cada combinación.
+
+<div style={{ display: "flex", gap: 24, alignItems: "flex-end", flexWrap: "wrap", margin: "24px 0" }}>
+  <PeepBust style={{ width: 160 }} variant="coffee" expression="smile" accessory="round-glasses" animation="float" title="Persona con café saludando" />
+  <PeepBust style={{ width: 160 }} variant="creative" expression="smile" animation="wave" title="Persona saludando" />
+  <PeepStanding style={{ width: 130 }} pose="resting" head="mohawk" expression="smile" animation="loading" title="Persona procesando" />
+</div>
+
+## Instalación
+
+Los releases se distribuyen por GitHub Packages. Agrega a tu `.npmrc`:
+
+```ini
+@piensa-it:registry=https://npm.pkg.github.com
+```
+
+Autentícate con un token de GitHub con permiso para leer paquetes, luego:
+
+```bash
+npm install @piensa-it/illustrations
+```
+
+Importa los estilos una sola vez en el entry point de tu app (necesario para las
+animaciones):
+
+```tsx
+import "@piensa-it/illustrations/styles.css";
+```
+
+## Elige una figura según el momento
+
+- **Onboarding / bienvenida** — `PeepBust` o `PeepStanding` con `animation="wave"`.
+- **Proceso en curso** — `animation="loading"` (o `"thinking"` para análisis)
+  mientras la tarea corre.
+- **Éxito / confirmación** — `animation="success"` (corre una vez).
+- **Estado vacío / hero** — `animation="float"` para un movimiento ambiental sutil.
+- **Cuando importa el lenguaje corporal** — usa `PeepStanding` (poses); si no,
+  `PeepBust`.
+
+## Uso básico
+
+```tsx
+import { PeepBust } from "@piensa-it/illustrations";
+import "@piensa-it/illustrations/styles.css";
+
+export function PersonajeBienvenida() {
+  return (
+    <PeepBust
+      variant="coffee"
+      expression="smile"
+      accessory="round-glasses"
+      title="Una persona sonriente con una taza de café"
+    />
+  );
+}
+```
+
+Usa `PeepStanding` cuando el cuerpo comunica:
+
+```tsx
+import { PeepStanding } from "@piensa-it/illustrations";
+
+<PeepStanding
+  pose="walking"
+  outfit="dark-top"
+  head="mohawk"
+  expression="smile"
+  title="Una persona caminando al siguiente paso"
+/>;
+```
+
+Omite `title` para arte decorativo: el personaje queda oculto para lectores de
+pantalla.
+
+## Animar desde código
+
+Ata la prop `animation` al estado de tu proceso — la librería hace el resto:
+
+```tsx
+function IndicadorGuardado({ isSaving }: { isSaving: boolean }) {
+  return (
+    <PeepBust
+      style={{ width: 200 }}
+      animation={isSaving ? "loading" : "success"}
+      expression={isSaving ? "calm" : "smile-big"}
+      title={isSaving ? "Guardando" : "Listo"}
+    />
+  );
+}
+```
+
+### Presets disponibles
+
+<div style={{ display: "flex", gap: 24, alignItems: "flex-end", flexWrap: "wrap", margin: "16px 0" }}>
+  <figure style={{ margin: 0, textAlign: "center" }}>
+    <PeepBust style={{ width: 120 }} variant="classic" animation="float" title="Ejemplo flotar" />
+    <figcaption><code>float</code></figcaption>
+  </figure>
+  <figure style={{ margin: 0, textAlign: "center" }}>
+    <PeepBust style={{ width: 120 }} variant="coffee" expression="calm" animation="loading" title="Ejemplo cargando" />
+    <figcaption><code>loading</code></figcaption>
+  </figure>
+  <figure style={{ margin: 0, textAlign: "center" }}>
+    <PeepBust style={{ width: 120 }} variant="mentor" expression="explaining" animation="thinking" title="Ejemplo pensando" />
+    <figcaption><code>thinking</code></figcaption>
+  </figure>
+  <figure style={{ margin: 0, textAlign: "center" }}>
+    <PeepBust style={{ width: 120 }} variant="creative" expression="smile" animation="wave" title="Ejemplo saludo" />
+    <figcaption><code>wave</code></figcaption>
+  </figure>
+  <figure style={{ margin: 0, textAlign: "center" }}>
+    <PeepBust style={{ width: 120 }} variant="classic" expression="smile-big" animation="success" title="Ejemplo éxito" />
+    <figcaption><code>success</code></figcaption>
+  </figure>
+</div>
+
+| Preset     | Movimiento                     | Repite | Úsalo para              |
+| ---------- | ------------------------------ | ------ | ----------------------- |
+| `none`     | ninguno (por defecto)          | —      | estático                |
+| `float`    | flotación vertical suave       | sí     | hero, estado vacío      |
+| `loading`  | balanceo + bob de cabeza       | sí     | proceso en curso        |
+| `thinking` | ladeo de cabeza + sway lento   | sí     | analizando              |
+| `wave`     | saludo por ladeo de cabeza     | sí     | onboarding / bienvenida |
+| `success`  | pop/bounce                     | no     | éxito / confirmación    |
+
+> `wave` es un saludo por ladeo de cabeza, no un brazo — los personajes actuales
+> no tienen una capa de brazo separable.
+
+### Repetir `success`
+
+`success` corre una sola vez. Para repetirlo (p. ej. dos guardados seguidos),
+cambia el `key` de React para que el elemento se vuelva a montar:
+
+```tsx
+<PeepBust key={saveId} animation="success" />
+```
+
+### Pausa y movimiento reducido
+
+- `paused` congela cualquier animación y el parpadeo ambiental sin cambiar el arte.
+- Todas las animaciones se desactivan automáticamente cuando el sistema pide
+  `prefers-reduced-motion: reduce`.
+
+## Accesibilidad
+
+Provee `title` para una imagen con etiqueta; omítelo para arte decorativo (el SVG
+queda oculto a la tecnología de asistencia).
+
+---
+
+Explora el **Catálogo** y el **Laboratorio** en el menú lateral para ver todas
+las figuras, expresiones, accesorios y poses con controles interactivos.

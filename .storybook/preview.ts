@@ -14,6 +14,7 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
+          "Inicio",
           "Catálogo",
           ["Figuras fuente"],
           "Laboratorio",
