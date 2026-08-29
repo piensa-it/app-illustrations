@@ -20,8 +20,7 @@ appearance without shipping a separate image for every combination.
 - Native SVG output that stays sharp at every size
 - ESM, CommonJS, and TypeScript declarations
 - Interactive Storybook playground
-- Motion kept separate through
-  [`@piensa-it/ui-library`](https://github.com/piensa-it/app-ui)
+- Declarative character animation presets (`loading`, `success`, `wave`, …)
 
 ## Installation
 
@@ -83,18 +82,25 @@ assistive technology.
 
 ## Motion and UI integration
 
-This package owns artwork and character composition. Shared motion policies,
-containers, timing, pause behavior, and `prefers-reduced-motion` support belong
-to [Piensa IT UI Library](https://github.com/piensa-it/app-ui).
+Base character animations ship in this package. Drive them from your app state
+with the declarative `animation` prop:
 
 ```tsx
-import { Illustration } from "@piensa-it/ui-library";
 import { PeepBust } from "@piensa-it/illustrations";
+import "@piensa-it/illustrations/styles.css";
 
-<Illustration motion="float" size="lg">
-  <PeepBust variant="coffee" title="A person enjoying coffee" />
-</Illustration>;
+<PeepBust animation="loading" title="Procesando" />;
 ```
+
+Available presets: `float`, `loading`, `thinking`, `wave`, `success`. See the
+[Usage Guide](./docs/GUIDE.md) for the full catalog and the loading→success
+pattern. All animations respect `prefers-reduced-motion` and can be frozen with
+`paused`.
+
+Higher-level motion policy across a flow (shared containers, orchestrated
+timing) can still be layered on with
+[`@piensa-it/ui-library`](https://github.com/piensa-it/app-ui), but it is no
+longer required to animate a character.
 
 ## Project structure
 
