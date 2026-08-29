@@ -3,6 +3,7 @@ import { useId } from "react";
 import type { IllustrationProps } from "../types";
 import type {
   PeepAccessory,
+  PeepAnimation,
   PeepBlink,
   PeepBustVariant,
   PeepExpression,
@@ -109,6 +110,8 @@ export interface PeepStandingProps extends IllustrationProps {
   accessory?: PeepAccessory;
   blink?: PeepBlink;
   paused?: boolean;
+  /** Animación semántica ligada a un proceso. Respeta `prefers-reduced-motion`. */
+  animation?: PeepAnimation;
 }
 
 const poseUrls: Record<PeepStandingPose, Record<PeepStandingOutfit, string>> = {
@@ -194,6 +197,7 @@ export function PeepStanding({
   accessory = "glasses",
   blink = "auto",
   paused = false,
+  animation = "none",
   title,
   ...svgProps
 }: PeepStandingProps) {
@@ -215,6 +219,8 @@ export function PeepStanding({
       aria-hidden={title ? undefined : true}
       data-peep-head={resolvedHead}
       data-peep-pose={pose}
+      data-animation={animation === "none" ? undefined : animation}
+      data-paused={paused ? "true" : undefined}
       xmlns="http://www.w3.org/2000/svg"
     >
       {title && <title id={titleId}>{title}</title>}

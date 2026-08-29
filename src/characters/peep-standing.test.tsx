@@ -115,4 +115,27 @@ describe("PeepStanding", () => {
     expect(container.querySelector("svg")).toHaveAttribute("data-peep-pose", pose);
     expect(container.querySelector('[data-peep-layer="pose"]')).toBeInTheDocument();
   });
+
+  it("expone la animación mediante data-animation", () => {
+    const { container } = render(<PeepStanding animation="wave" blink="off" />);
+
+    expect(container.querySelector("svg")).toHaveAttribute(
+      "data-animation",
+      "wave",
+    );
+  });
+
+  it("no expone data-animation cuando es none (por defecto)", () => {
+    const { container } = render(<PeepStanding blink="off" />);
+
+    expect(container.querySelector("svg")).not.toHaveAttribute("data-animation");
+  });
+
+  it("marca data-paused cuando paused está activo", () => {
+    const { container } = render(
+      <PeepStanding animation="loading" paused blink="off" />,
+    );
+
+    expect(container.querySelector("svg")).toHaveAttribute("data-paused", "true");
+  });
 });
