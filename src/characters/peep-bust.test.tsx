@@ -30,4 +30,27 @@ describe("PeepBust", () => {
       screen.getByRole("img", { name: "Personaje creativo" }),
     ).toBeInTheDocument();
   });
+
+  it("expone la animación mediante data-animation", () => {
+    const { container } = render(<PeepBust animation="loading" blink="off" />);
+
+    expect(container.querySelector("svg")).toHaveAttribute(
+      "data-animation",
+      "loading",
+    );
+  });
+
+  it("no expone data-animation cuando es none (por defecto)", () => {
+    const { container } = render(<PeepBust blink="off" />);
+
+    expect(container.querySelector("svg")).not.toHaveAttribute("data-animation");
+  });
+
+  it("marca data-paused cuando paused está activo", () => {
+    const { container } = render(
+      <PeepBust animation="float" paused blink="off" />,
+    );
+
+    expect(container.querySelector("svg")).toHaveAttribute("data-paused", "true");
+  });
 });

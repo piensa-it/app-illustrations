@@ -71,6 +71,14 @@ export type PeepAccessory =
 
 export type PeepBlink = "auto" | "off";
 
+export type PeepAnimation =
+  | "none"
+  | "float"
+  | "loading"
+  | "thinking"
+  | "wave"
+  | "success";
+
 export type PeepBustVariant = "classic" | "creative" | "casual" | "mentor" | "coffee";
 
 export interface PeepBustProps extends IllustrationProps {
@@ -84,6 +92,8 @@ export interface PeepBustProps extends IllustrationProps {
   blink?: PeepBlink;
   /** Detiene comportamientos ambientales sin cambiar la composición. */
   paused?: boolean;
+  /** Animación semántica ligada a un proceso. Respeta `prefers-reduced-motion`. */
+  animation?: PeepAnimation;
 }
 
 const expressionSources: Record<PeepExpression, string> = {
@@ -133,6 +143,7 @@ export function PeepBust({
   accessory = "none",
   blink = "auto",
   paused = false,
+  animation = "none",
   title,
   ...svgProps
 }: PeepBustProps) {
@@ -155,6 +166,8 @@ export function PeepBust({
       aria-labelledby={title ? titleId : undefined}
       aria-hidden={title ? undefined : true}
       data-blinking={isBlinking || closedByExpression}
+      data-animation={animation === "none" ? undefined : animation}
+      data-paused={paused ? "true" : undefined}
       xmlns="http://www.w3.org/2000/svg"
     >
       {title && <title id={titleId}>{title}</title>}
