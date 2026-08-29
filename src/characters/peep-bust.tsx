@@ -180,50 +180,52 @@ export function PeepBust({
         height={733}
         layer="body"
       />
-      <SvgLayer
-        className="peep-bust__head"
-        source={variantLayers.head}
-        viewBox="0 0 473 567"
-        x={372}
-        y={180}
-        width={473}
-        height={567}
-        layer="head"
-      />
-      {!closedByExpression && (
+      <g className="peep-bust__head-group">
         <SvgLayer
-          className="peep-bust__face"
-          source={faceSource}
+          className="peep-bust__head"
+          source={variantLayers.head}
+          viewBox="0 0 473 567"
+          x={372}
+          y={180}
+          width={473}
+          height={567}
+          layer="head"
+        />
+        {!closedByExpression && (
+          <SvgLayer
+            className="peep-bust__face"
+            source={faceSource}
+            viewBox="0 0 289 293"
+            x={531}
+            y={366}
+            width={289}
+            height={293}
+            layer="face"
+          />
+        )}
+        <SvgLayer
+          className="peep-bust__closed-eyes"
+          source={closedEyesSource}
           viewBox="0 0 289 293"
           x={531}
           y={366}
           width={289}
           height={293}
-          layer="face"
+          layer="closed-eyes"
         />
-      )}
-      <SvgLayer
-        className="peep-bust__closed-eyes"
-        source={closedEyesSource}
-        viewBox="0 0 289 293"
-        x={531}
-        y={366}
-        width={289}
-        height={293}
-        layer="closed-eyes"
-      />
-      {accessorySource && (
-        <SvgLayer
-          className="peep-bust__accessory"
-          source={accessorySource}
-          viewBox="0 0 392 138"
-          x={419}
-          y={421}
-          width={392}
-          height={138}
-          layer="accessory"
-        />
-      )}
+        {accessorySource && (
+          <SvgLayer
+            className="peep-bust__accessory"
+            source={accessorySource}
+            viewBox="0 0 392 138"
+            x={419}
+            y={421}
+            width={392}
+            height={138}
+            layer="accessory"
+          />
+        )}
+      </g>
     </svg>
   );
 }

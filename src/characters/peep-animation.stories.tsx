@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { type CSSProperties, useEffect, useState } from "react";
 
 import { PeepBust, type PeepAnimation } from "./peep-bust";
+import { PeepStanding } from "./peep-standing";
 
 const meta = {
   title: "Characters/PeepBust/Animation",
@@ -58,4 +59,29 @@ const ProcessDemo = () => {
 
 export const Process: Story = {
   render: () => <ProcessDemo />,
+};
+
+export const StandingWave: Story = {
+  render: () => (
+    <PeepStanding
+      style={frame}
+      animation="wave"
+      pose="resting"
+      head="mohawk"
+      expression="smile"
+      title="Saludo de bienvenida"
+    />
+  ),
+};
+
+export const StandingLoading: Story = {
+  render: () => (
+    <PeepStanding
+      style={frame}
+      animation="loading"
+      pose="resting"
+      expression="calm"
+      title="Procesando"
+    />
+  ),
 };

@@ -234,46 +234,48 @@ export function PeepStanding({
         width="1645"
         height="2500"
       />
-      <SvgLayer
-        className="peep-standing__head"
-        source={headSources[resolvedHead]}
-        viewBox="0 0 473 567"
-        x={404}
-        y={180}
-        width={473}
-        height={567}
-        layer="head"
-      />
-      {!closedByExpression && (
+      <g className="peep-standing__head-group">
+        <SvgLayer
+          className="peep-standing__head"
+          source={headSources[resolvedHead]}
+          viewBox="0 0 473 567"
+          x={404}
+          y={180}
+          width={473}
+          height={567}
+          layer="head"
+        />
+        {!closedByExpression && (
+          <image
+            className="peep-standing__face"
+            href={expressionUrls[expression]}
+            opacity={isBlinking ? 0 : 1}
+            x="563"
+            y="366"
+            width="289"
+            height="293"
+          />
+        )}
         <image
-          className="peep-standing__face"
-          href={expressionUrls[expression]}
-          opacity={isBlinking ? 0 : 1}
+          className="peep-standing__closed-eyes"
+          href={closedEyesUrl}
+          opacity={isBlinking || closedByExpression ? 1 : 0}
           x="563"
           y="366"
           width="289"
           height="293"
         />
-      )}
-      <image
-        className="peep-standing__closed-eyes"
-        href={closedEyesUrl}
-        opacity={isBlinking || closedByExpression ? 1 : 0}
-        x="563"
-        y="366"
-        width="289"
-        height="293"
-      />
-      {accessoryUrl && (
-        <image
-          className="peep-standing__accessory"
-          href={accessoryUrl}
-          x="451"
-          y="421"
-          width="392"
-          height="138"
-        />
-      )}
+        {accessoryUrl && (
+          <image
+            className="peep-standing__accessory"
+            href={accessoryUrl}
+            x="451"
+            y="421"
+            width="392"
+            height="138"
+          />
+        )}
+      </g>
     </svg>
   );
 }

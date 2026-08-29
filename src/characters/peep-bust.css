@@ -38,22 +38,22 @@
   animation: peep-bust-float 3s ease-in-out infinite;
 }
 
-.peep-bust[data-animation="loading"] .peep-bust__head,
-.peep-bust[data-animation="thinking"] .peep-bust__head,
-.peep-bust[data-animation="wave"] .peep-bust__head {
+.peep-bust[data-animation="loading"] .peep-bust__head-group,
+.peep-bust[data-animation="thinking"] .peep-bust__head-group,
+.peep-bust[data-animation="wave"] .peep-bust__head-group {
   transform-box: fill-box;
   transform-origin: 50% 95%;
 }
 
-.peep-bust[data-animation="loading"] .peep-bust__head {
+.peep-bust[data-animation="loading"] .peep-bust__head-group {
   animation: peep-bust-loading 1.4s ease-in-out infinite;
 }
 
-.peep-bust[data-animation="thinking"] .peep-bust__head {
+.peep-bust[data-animation="thinking"] .peep-bust__head-group {
   animation: peep-bust-thinking 3.2s ease-in-out infinite;
 }
 
-.peep-bust[data-animation="wave"] .peep-bust__head {
+.peep-bust[data-animation="wave"] .peep-bust__head-group {
   animation: peep-bust-wave 0.9s ease-in-out infinite;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .peep-bust[data-paused="true"],
-.peep-bust[data-paused="true"] .peep-bust__head {
+.peep-bust[data-paused="true"] .peep-bust__head-group {
   animation-play-state: paused;
 }
 
@@ -128,7 +128,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .peep-bust[data-animation],
-  .peep-bust[data-animation] .peep-bust__head {
+  .peep-bust[data-animation] .peep-bust__head-group {
     animation: none;
   }
 }
