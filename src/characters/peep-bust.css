@@ -29,11 +29,6 @@
   .peep-bust__accessory {
     transition: none;
   }
-
-  .peep-bust[data-animation],
-  .peep-bust[data-animation] .peep-bust__head {
-    animation: none;
-  }
 }
 
 /* Animation presets */
@@ -128,5 +123,12 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peep-bust[data-animation],
+  .peep-bust[data-animation] .peep-bust__head {
+    animation: none;
   }
 }
