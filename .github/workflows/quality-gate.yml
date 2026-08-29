@@ -1,0 +1,49 @@
+# Thin wrapper over the Piensa IT standard quality gate. The gate itself lives
+# in piensa-it/.github and is consumed by tag (@v1), never @main. See
+# https://github.com/piensa-it/.github/blob/main/docs/QUALITY_GATE.md
+name: Quality Gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: read
+  pull-requests: read
+
+jobs:
+  pr-metadata:
+    if: github.event_name == 'pull_request'
+    uses: piensa-it/.github/.github/workflows/reusable-pr-metadata.yml@v1
+
+  quality-gate:
+    uses: piensa-it/.github/.github/workflows/reusable-quality-gate.yml@v1
+    with:
+      # Must match deploy.yml's node_version.
+      node_version: "22"
+      install_command: "npm ci"
+      lint_blocking: true
+      coverage_command: "npm run test:coverage"
+      # verify:package runs the library build AND guards against leaking source
+      # artwork into the published npm package, so it belongs inside the gate.
+      build_command: "npm run verify:package"
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+
+  security:
+    uses: piensa-it/.github/.github/workflows/reusable-security.yml@v1
+
+  e2e:
+    uses: piensa-it/.github/.github/workflows/reusable-e2e.yml@v1
+    with:
+      # Storybook browser gate (Playwright). Self-contained: the Playwright
+      # config builds and serves Storybook itself, so there is no backend
+      # environment to map — build_env_map stays empty.
+      e2e_enabled: true
+      install_command: "npm ci"
+      e2e_command: "npm run test:browser"
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}

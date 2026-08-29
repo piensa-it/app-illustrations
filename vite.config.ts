@@ -56,5 +56,24 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    coverage: {
+      provider: "v8",
+      // Only the shipped library source. Stories, docs pages, and the source
+      // catalog are demo/config, not part of the published package surface.
+      include: ["src/characters/**/*.{ts,tsx}"],
+      exclude: [
+        "src/**/*.{test,spec}.{ts,tsx}",
+        "src/**/*.stories.{ts,tsx}",
+      ],
+      reporter: ["text", "html", "lcov"],
+      // No-regression floor: the standard sets each repo's floor to its current
+      // measured coverage. Raise these in the same PR that adds the tests.
+      thresholds: {
+        lines: 73,
+        functions: 54,
+        branches: 78,
+        statements: 70,
+      },
+    },
   },
 });

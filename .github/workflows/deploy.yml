@@ -1,48 +1,43 @@
-name: Deploy
+# Thin wrapper over the Piensa IT standard deploy. Actions builds, Netlify only
+# publishes the already-compiled site. The reusable carries the four protections
+# (credentials checked first, empty publish dir refused, bundle asserts, errors
+# that name the missing secret). See
+# https://github.com/piensa-it/.github/blob/main/docs/DEPLOY.md
+name: Deploy a producción
 
-# Publishes the Storybook docs site to Netlify only after the CI workflow
-# succeeds on a push to main. Deploying on workflow_run (instead of on push)
-# guarantees we never publish a build that failed validate or browser-gate.
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types: [completed]
+  push:
+    branches: [main]
+  # Re-deploy the current head of main without inventing an empty commit.
+  workflow_dispatch:
+
+# A second merge waits for the first; simultaneous deploys can publish out of
+# order and leave production on the older commit.
+concurrency:
+  group: deploy-produccion
+  cancel-in-progress: false
 
 permissions:
   contents: read
-
-concurrency:
-  group: deploy-production
-  cancel-in-progress: false
+  packages: read
 
 jobs:
   deploy:
-    # Only run for a successful CI triggered by a push to main.
-    if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'main'
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://illustrations.piensait.com
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          # Build the exact commit CI validated, not just the branch tip.
-          ref: ${{ github.event.workflow_run.head_sha }}
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run build-storybook
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: >-
-          npx --yes netlify-cli@27 deploy
-          --prod
-          --dir=storybook-static
-          --site=93aba42e-bb5a-4005-96f4-abfe45c32169
-          --message="CI ${{ github.event.workflow_run.head_sha }} via GitHub Actions"
+    uses: piensa-it/.github/.github/workflows/reusable-deploy.yml@v1
+    with:
+      # Must match quality-gate.yml's node_version, or the commit that was
+      # tested is not the commit that ships.
+      node_version: "22"
+      install_command: "npm ci"
+      # This is a Storybook docs site, not an SPA: the build emits a static
+      # multi-file directory, so there is no _redirects/SPA-fallback concern.
+      build_command: "npm run build-storybook"
+      publish_dir: "storybook-static"
+      environment_name: "production"
+      environment_url: "https://illustrations.piensait.com"
+      # No backend env vars: the docs site has no runtime configuration, so
+      # build_env_map / required_build_vars / bundle_assert_vars stay empty.
+    secrets:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
