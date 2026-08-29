@@ -2,6 +2,7 @@ export type { IllustrationProps } from "./types";
 export {
   PeepBust,
   type PeepAccessory,
+  type PeepAnimation,
   type PeepBlink,
   type PeepBustProps,
   type PeepBustVariant,
