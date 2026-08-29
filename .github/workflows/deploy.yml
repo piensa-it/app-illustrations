@@ -1,0 +1,48 @@
+name: Deploy
+
+# Publishes the Storybook docs site to Netlify only after the CI workflow
+# succeeds on a push to main. Deploying on workflow_run (instead of on push)
+# guarantees we never publish a build that failed validate or browser-gate.
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Only run for a successful CI triggered by a push to main.
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://illustrations.piensait.com
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Build the exact commit CI validated, not just the branch tip.
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build-storybook
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: >-
+          npx --yes netlify-cli@27 deploy
+          --prod
+          --dir=storybook-static
+          --site=93aba42e-bb5a-4005-96f4-abfe45c32169
+          --message="CI ${{ github.event.workflow_run.head_sha }} via GitHub Actions"
