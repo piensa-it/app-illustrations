@@ -22,3 +22,105 @@
     transition: none;
   }
 }
+
+/* Animation presets */
+.peep-standing[data-animation="float"] {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: peep-standing-float 3.4s ease-in-out infinite;
+}
+
+.peep-standing[data-animation="loading"] .peep-standing__head,
+.peep-standing[data-animation="thinking"] .peep-standing__head,
+.peep-standing[data-animation="wave"] .peep-standing__head {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.peep-standing[data-animation="loading"] .peep-standing__head {
+  animation: peep-standing-loading 1.4s ease-in-out infinite;
+}
+
+.peep-standing[data-animation="thinking"] .peep-standing__head {
+  animation: peep-standing-thinking 3.2s ease-in-out infinite;
+}
+
+.peep-standing[data-animation="wave"] .peep-standing__head {
+  animation: peep-standing-wave 0.9s ease-in-out infinite;
+}
+
+.peep-standing[data-animation="success"] {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: peep-standing-success 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+
+.peep-standing[data-paused="true"],
+.peep-standing[data-paused="true"] .peep-standing__head {
+  animation-play-state: paused;
+}
+
+@keyframes peep-standing-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5%);
+  }
+}
+
+@keyframes peep-standing-loading {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-1%) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-1%) rotate(3deg);
+  }
+}
+
+@keyframes peep-standing-thinking {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes peep-standing-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes peep-standing-success {
+  0% {
+    transform: scale(0.9);
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peep-standing[data-animation],
+  .peep-standing[data-animation] .peep-standing__head {
+    animation: none;
+  }
+}
